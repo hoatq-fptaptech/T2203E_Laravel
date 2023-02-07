@@ -15,3 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[App\Http\Controllers\WebController::class,"home"] );
 Route::get('about-us',[App\Http\Controllers\WebController::class,"aboutUs"]);
+
+// category
+Route::get("/admin/product",[\App\Http\Controllers\Admin\ProductController::class,"listAll"]);
