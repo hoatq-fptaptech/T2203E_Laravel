@@ -3,6 +3,9 @@
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">Products</h1>
     </div><!-- /.col -->
+    <div class="col-sm-6 text-right">
+        <a class="btn btn-outline-primary" href="{{url("admin/product/create")}}">Create a new product</a>
+    </div>
 @endsection
 @section("main_content")
     <div class="card">
