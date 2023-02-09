@@ -27,8 +27,36 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-        $data = $request->all();
-        Product::create($data);
+        $request->validate([
+            "name"=>"required|string|min:6",
+            "price"=>"required|numeric|min:0",
+            "qty"=>"required|numeric|min:0",
+            "category_id"=>"required",
+        ],[
+            "required"=>"Vui lòng nhập thông tin",
+            "string"=> "Phải nhập vào là một chuỗi văn bản",
+            "min"=> "Phải nhập :attribute  tối thiểu :min"
+        ]);
+
+        $thumbnail = null;
+        if($request->hasFile("thumbnail")){
+            $file = $request->file("thumbnail");
+            $fileName = time().$file->getClientOriginalName();
+//            $ext = $file->getClientOriginalExtension();
+//            $fileName = time().".".$ext;
+            $path = public_path("uploads");
+            $file->move($path,$fileName);
+            $thumbnail = "uploads/".$fileName;
+        }
+
+        $product = Product::create([
+            "name"=>$request->get("name"),
+            "price"=>$request->get("price"),
+            "thumbnail"=>$thumbnail,
+            "description"=>$request->get("description"),
+            "qty"=>$request->get("qty"),
+            "category_id"=>$request->get("category_id"),
+        ]);
         return redirect()->to("admin/product");
     }
 }

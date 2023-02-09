@@ -25,36 +25,47 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="post" action="{{url("/admin/product/create")}}" role="form">
+                <form method="post" action="{{url("/admin/product/create")}}" role="form" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        <div class="form-group">
-                            <label>Product Name</label>
-                            <input type="text" name="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Product Price</label>
-                            <input type="number" name="price" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Product Thumbnail</label>
-                            <input type="text" name="thumbnail" class="form-control">
-                        </div>
+                        @include("admin.html.form.input",[
+                            "label"=>"Product Name",
+                            "key"=>"name",
+                            "type"=>"text",
+                            "required"=>true
+                        ])
+                        @include("admin.html.form.input",[
+                            "label"=>"Product Price",
+                            "key"=>"price",
+                            "type"=>"number",
+                            "required"=>true
+                        ])
+                        @include("admin.html.form.input",[
+                            "label"=>"Product Thumbnail",
+                            "key"=>"thumbnail",
+                            "type"=>"file",
+                            "required"=>true
+                        ])
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea class="form-control" name="description"></textarea>
+                            <textarea class="form-control" name="description">{{old("description")}}</textarea>
                         </div>
-                        <div class="form-group">
-                            <label>Quantity</label>
-                            <input type="number" name="qty" class="form-control" required>
-                        </div>
+                        @include("admin.html.form.input",[
+                            "label"=>"Quantity",
+                            "key"=>"qty",
+                            "type"=>"number",
+                            "required"=>true
+                        ])
                         <div class="form-group">
                             <label>Category</label>
                             <select name="category_id" class="form-control select2" required>
                                 @foreach($categories as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option @if(old("category_id")== $item->id) selected @endif  value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
+                            @error("category_id")
+                            <p class="text-danger">{{$message}}</p>
+                            @enderror
                         </div>
                     </div>
                     <!-- /.card-body -->

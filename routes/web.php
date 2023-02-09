@@ -19,4 +19,4 @@ Route::get('about-us',[App\Http\Controllers\WebController::class,"aboutUs"]);
 // category
 Route::get("/admin/product",[\App\Http\Controllers\Admin\ProductController::class,"listAll"]);
 Route::get("/admin/product/create",[\App\Http\Controllers\Admin\ProductController::class,"create"]);
-Route::post("/admin/product/create",[\App\Http\Controllers\Admin\ProductController::class,"store"]);
+Route::post("/admin/product/create",[\App\Http\Controllers\Admin\ProductController::class,"store"])->name("create_product");
