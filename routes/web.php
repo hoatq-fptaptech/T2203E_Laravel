@@ -20,3 +20,5 @@ Route::get('about-us',[App\Http\Controllers\WebController::class,"aboutUs"]);
 Route::get("/admin/product",[\App\Http\Controllers\Admin\ProductController::class,"listAll"]);
 Route::get("/admin/product/create",[\App\Http\Controllers\Admin\ProductController::class,"create"]);
 Route::post("/admin/product/create",[\App\Http\Controllers\Admin\ProductController::class,"store"])->name("create_product");
+Route::get("/admin/product/edit/{product}",[\App\Http\Controllers\Admin\ProductController::class,"edit"]);
+Route::post("/admin/product/edit/{product}",[\App\Http\Controllers\Admin\ProductController::class,"update"]);

@@ -24,6 +24,7 @@
                     <th>Qty</th>
                     <th>Category Id</th>
                     <th style="width: 40px">Status</th>
+                    <th style="width: 40px">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,6 +42,9 @@
                             @else
                             <span class="badge bg-warning">Inactive</span>
                             @endif
+                        </td>
+                        <td>
+                            <a href="{{url("admin/product/edit",["product"=>$item->id])}}" class="btn btn-outline-primary">Edit</a>
                         </td>
                     </tr>
                     @endforeach

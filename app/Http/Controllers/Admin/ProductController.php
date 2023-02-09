@@ -32,10 +32,12 @@ class ProductController extends Controller
             "price"=>"required|numeric|min:0",
             "qty"=>"required|numeric|min:0",
             "category_id"=>"required",
+            "thumbnail"=>"required|image|mimes:jpg,png,jpeg,gif"
         ],[
             "required"=>"Vui lòng nhập thông tin",
             "string"=> "Phải nhập vào là một chuỗi văn bản",
-            "min"=> "Phải nhập :attribute  tối thiểu :min"
+            "min"=> "Phải nhập :attribute  tối thiểu :min",
+            "mimes"=>"Vui lòng nhập đúng định dạng ảnh"
         ]);
 
         $thumbnail = null;
@@ -50,6 +52,53 @@ class ProductController extends Controller
         }
 
         $product = Product::create([
+            "name"=>$request->get("name"),
+            "price"=>$request->get("price"),
+            "thumbnail"=>$thumbnail,
+            "description"=>$request->get("description"),
+            "qty"=>$request->get("qty"),
+            "category_id"=>$request->get("category_id"),
+        ]);
+        return redirect()->to("admin/product");
+    }
+
+    public function edit(Product $product){
+        // dung id de tim product
+//        $product = Product::find($id);
+//        if($product==null){
+//            return abort(404);
+//        }
+
+//        $product = Product::findOrFail($id);
+
+        $categories = Category::all();
+        return view("admin.product.edit",compact("categories",'product'));
+    }
+
+    public function update(Product $product, Request $request){
+        $request->validate([
+            "name"=>"required|string|min:6",
+            "price"=>"required|numeric|min:0",
+            "qty"=>"required|numeric|min:0",
+            "category_id"=>"required",
+            "thumbnail"=>"nullable|image|mimes:jpg,png,jpeg,gif"
+        ],[
+            "required"=>"Vui lòng nhập thông tin",
+            "string"=> "Phải nhập vào là một chuỗi văn bản",
+            "min"=> "Phải nhập :attribute  tối thiểu :min",
+            "mimes"=>"Vui lòng nhập đúng định dạng ảnh"
+        ]);
+
+        $thumbnail = $product->thumbnail;
+        if($request->hasFile("thumbnail")){
+            $file = $request->file("thumbnail");
+            $fileName = time().$file->getClientOriginalName();
+            $path = public_path("uploads");
+            $file->move($path,$fileName);
+            $thumbnail = "uploads/".$fileName;
+        }
+
+        $product->update([
             "name"=>$request->get("name"),
             "price"=>$request->get("price"),
             "thumbnail"=>$thumbnail,
