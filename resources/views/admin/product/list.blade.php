@@ -35,7 +35,7 @@
                         <td><img width="75" src="{{$item->thumbnail}}" /></td>
                         <td>{{$item->price}}</td>
                         <td>{{$item->qty}}</td>
-                        <td>{{$item->category_id}}</td>
+                        <td>{{$item->Category->name}}</td>
                         <td>
                             @if($item->status)
                             <span class="badge bg-success">Active</span>
