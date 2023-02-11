@@ -11,6 +11,33 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Bordered Table</h3>
+            <div class="card-tools">
+                <form action="{{url("admin/product")}}" method="get">
+                <div class="input-group input-group-sm float-left mr-3" style="width: 150px;">
+                    <select class="form-control float-right" name="category_id">
+                        <option value="0">Choose category...</option>
+                        @foreach($categories as $item)
+                            <option @if(app("request")->input("category_id")==$item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="input-group input-group-sm float-left mr-3" style="width: 150px;">
+                    <select class="form-control float-right" name="category_id">
+                        <option value="0">Choose category...</option>
+                        @foreach($categories as $item)
+                            <option @if(app("request")->input("category_id")==$item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="input-group input-group-sm float-left" style="width: 150px;">
+                    <input value="{{app("request")->input("search")}}" type="text" name="search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                </form>
+            </div>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -65,7 +92,7 @@
 {{--                <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
 {{--                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>--}}
 {{--            </ul>--}}
-            {!! $data->links("pagination::bootstrap-4") !!}
+            {!! $data->appends(app("request")->input())->links("pagination::bootstrap-4") !!}
         </div>
     </div>
     <!-- /.card -->

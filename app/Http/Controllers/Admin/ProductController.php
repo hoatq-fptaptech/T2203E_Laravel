@@ -10,35 +10,51 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function listAll(){
-//          $order = Order::find(1);
-//          dd($order->Products);
+    public function listAll(Request $request){
+        $search = $request->get("search");
+        $category_id = $request->get("category_id");
 
-//            $p = Product::find(999);
-//            dd($p->Orders);
-
-//        $data = Product::where("price",">",500)
-//            ->where("qty",20)
-//           // ->orWhere("status",true)
-//            //->orWhere("name","like","%a%")
-////            ->whereMonth("created_at","=",3)
-//            ->orderBy("id","desc")->paginate(20);
-//        $data = Product::leftJoin("categories","categories.id","=","products.category_id")
-//                ->where("products.qty",20)
-//                ->select(["products.*","categories.name as category_name"])
-//                ->orderBy("id","desc")->paginate(20);
         $data =  Product::with("Category")
-//            ->where("price",">",500)
-//            ->where("qty",20)
+            ->Search($search)
+            ->CategoryFilter($category_id)
             ->orderBy("id","desc")
             ->paginate(20);
-//        $x = Category::all();
-//        $y = $x[0];
-//        $y->Products;/// array
+
+        $categories = Category::all();
         return view("admin.product.list",[
-            "data"=>$data
+            "data"=>$data,
+            "categories"=>$categories
         ]);
     }
+//    public function listAll(){
+////          $order = Order::find(1);
+////          dd($order->Products);
+//
+////            $p = Product::find(999);
+////            dd($p->Orders);
+//
+////        $data = Product::where("price",">",500)
+////            ->where("qty",20)
+////           // ->orWhere("status",true)
+////            //->orWhere("name","like","%a%")
+//////            ->whereMonth("created_at","=",3)
+////            ->orderBy("id","desc")->paginate(20);
+////        $data = Product::leftJoin("categories","categories.id","=","products.category_id")
+////                ->where("products.qty",20)
+////                ->select(["products.*","categories.name as category_name"])
+////                ->orderBy("id","desc")->paginate(20);
+//        $data =  Product::with("Category")
+////            ->where("price",">",500)
+////            ->where("qty",20)
+//            ->orderBy("id","desc")
+//            ->paginate(20);
+////        $x = Category::all();
+////        $y = $x[0];
+////        $y->Products;/// array
+//        return view("admin.product.list",[
+//            "data"=>$data
+//        ]);
+//    }
 //    public function listAll(){
 ////        $data = Product::all();// collection Product object
 //        // offset = (page - 1) * limit
