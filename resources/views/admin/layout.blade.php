@@ -47,7 +47,7 @@
     </aside>
     <!-- /.control-sidebar -->
 </div>
-
+    @include("admin.html.notification")
 
     @include('admin.html.js')
     @yield("custom_js")

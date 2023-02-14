@@ -17,9 +17,22 @@ Route::get('/',[App\Http\Controllers\WebController::class,"home"] );
 Route::get('about-us',[App\Http\Controllers\WebController::class,"aboutUs"]);
 
 // category
-Route::get("/admin/product",[\App\Http\Controllers\Admin\ProductController::class,"listAll"]);
-Route::get("/admin/product/create",[\App\Http\Controllers\Admin\ProductController::class,"create"]);
-Route::post("/admin/product/create",[\App\Http\Controllers\Admin\ProductController::class,"store"])->name("create_product");
-Route::get("/admin/product/edit/{product}",[\App\Http\Controllers\Admin\ProductController::class,"edit"]);
-Route::post("/admin/product/edit/{product}",[\App\Http\Controllers\Admin\ProductController::class,"update"]);
-Route::post("/admin/product/delete/{product}",[\App\Http\Controllers\Admin\ProductController::class,"delete"]);
+Route::middleware("auth")->prefix("admin")->group(function (){
+    Route::prefix("product")->group(function (){
+        Route::get("/",[\App\Http\Controllers\Admin\ProductController::class,"listAll"]);
+        Route::get("/create",[\App\Http\Controllers\Admin\ProductController::class,"create"]);
+        Route::post("/create",[\App\Http\Controllers\Admin\ProductController::class,"store"])->name("create_product");
+        Route::get("/edit/{product}",[\App\Http\Controllers\Admin\ProductController::class,"edit"]);
+        Route::post("/edit/{product}",[\App\Http\Controllers\Admin\ProductController::class,"update"]);
+        Route::post("/delete/{product}",[\App\Http\Controllers\Admin\ProductController::class,"delete"]);
+    });
+
+    Route::prefix("category")->group(function (){
+
+    });
+});
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

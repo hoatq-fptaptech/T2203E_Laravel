@@ -112,9 +112,23 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                <i class="fas fa-th-large"></i>
-            </a>
+{{--            @guest()--}}
+{{--                <a href="{{route("login")}}" class="btn btn-default">Login</a>--}}
+{{--            @elseguest()--}}
+{{--            <form action="{{route("logout")}}" method="post">--}}
+{{--                @csrf--}}
+{{--                <button type="submit" class="btn btn-default">Logout</button>--}}
+{{--            </form>--}}
+{{--            @endguest--}}
+
+            @auth()
+            <form action="{{route("logout")}}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-default">Logout</button>
+            </form>
+            @elseauth()
+                <a href="{{route("login")}}" class="btn btn-default">Login</a>
+            @endauth
         </li>
     </ul>
 </nav>

@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+//    public function __construct(){
+//        $this->middleware("auth");
+//    }
     public function listAll(Request $request){
         $search = $request->get("search");
         $category_id = $request->get("category_id");
@@ -86,27 +88,30 @@ class ProductController extends Controller
             "min"=> "Phải nhập :attribute  tối thiểu :min",
             "mimes"=>"Vui lòng nhập đúng định dạng ảnh"
         ]);
-
-        $thumbnail = null;
-        if($request->hasFile("thumbnail")){
-            $file = $request->file("thumbnail");
-            $fileName = time().$file->getClientOriginalName();
+        try {
+            $thumbnail = null;
+            if($request->hasFile("thumbnail")){
+                $file = $request->file("thumbnail");
+                $fileName = time().$file->getClientOriginalName();
 //            $ext = $file->getClientOriginalExtension();
 //            $fileName = time().".".$ext;
-            $path = public_path("uploads");
-            $file->move($path,$fileName);
-            $thumbnail = "uploads/".$fileName;
-        }
+                $path = public_path("uploads");
+                $file->move($path,$fileName);
+                $thumbnail = "uploads/".$fileName;
+            }
 
-        $product = Product::create([
-            "name"=>$request->get("name"),
-            "price"=>$request->get("price"),
-            "thumbnail"=>$thumbnail,
-            "description"=>$request->get("description"),
-            "qty"=>$request->get("qty"),
-            "category_id"=>$request->get("category_id"),
-        ]);
-        return redirect()->to("admin/product");
+            Product::create([
+                "name"=>$request->get("name"),
+                "price"=>$request->get("price"),
+                "thumbnail"=>$thumbnail,
+                "description"=>$request->get("description"),
+                "qty"=>$request->get("qty"),
+                "category_id"=>$request->get("category_id"),
+            ]);
+            return redirect()->to("admin/product")->with("success","Thêm sản phẩm thành công");
+        }catch (\Exception $e){
+            return redirect()->back()->with("error",$e->getMessage());
+        }
     }
 
     public function edit(Product $product){
