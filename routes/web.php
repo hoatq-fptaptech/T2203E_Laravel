@@ -17,7 +17,8 @@ Route::get('/',[App\Http\Controllers\WebController::class,"home"] );
 Route::get('about-us',[App\Http\Controllers\WebController::class,"aboutUs"]);
 
 // category
-Route::middleware("auth")->prefix("admin")->group(function (){
+Route::middleware(["auth","admin"])->prefix("admin")->group(function (){
+    Route::get("/dashboard",[\App\Http\Controllers\HomeController::class,"index"]);
     Route::prefix("product")->group(function (){
         Route::get("/",[\App\Http\Controllers\Admin\ProductController::class,"listAll"]);
         Route::get("/create",[\App\Http\Controllers\Admin\ProductController::class,"create"]);
