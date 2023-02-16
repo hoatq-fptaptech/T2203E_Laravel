@@ -112,22 +112,15 @@
             </div>
         </li>
         <li class="nav-item">
-{{--            @guest()--}}
-{{--                <a href="{{route("login")}}" class="btn btn-default">Login</a>--}}
-{{--            @elseguest()--}}
-{{--            <form action="{{route("logout")}}" method="post">--}}
-{{--                @csrf--}}
-{{--                <button type="submit" class="btn btn-default">Logout</button>--}}
-{{--            </form>--}}
-{{--            @endguest--}}
+            @guest
+                <a href="{{route("login")}}" class="btn btn-default">Login</a>
+            @endguest
 
-            @auth()
+            @auth
             <form action="{{route("logout")}}" method="post">
                 @csrf
                 <button type="submit" class="btn btn-default">Logout</button>
             </form>
-            @elseauth()
-                <a href="{{route("login")}}" class="btn btn-default">Login</a>
             @endauth
         </li>
     </ul>
