@@ -29,7 +29,7 @@
                     </ul>
                 </div>
                 <div class="featured__item__text">
-                    <h6><a href="#">{{$p->name}}</a></h6>
+                    <h6><a href="{{route("product_detail",["product"=>$p->id])}}">{{$p->name}}</a></h6>
                     <h5>${{number_format($p->price)}}</h5>
                 </div>
             </div>
