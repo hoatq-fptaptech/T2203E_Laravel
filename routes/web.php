@@ -27,3 +27,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get("/detail/{product}",[\App\Http\Controllers\WebController::class,"detail"])->name("product_detail");
 Route::post("/add-to-cart/{product}",[\App\Http\Controllers\WebController::class,"addToCart"])->name("add_to_cart");
+Route::get("/cart",[\App\Http\Controllers\WebController::class,"cart"]);
+Route::get("/checkout",[\App\Http\Controllers\WebController::class,"checkout"]);
+Route::get("/remove-cart/{product}",[\App\Http\Controllers\WebController::class,"remove"]);

@@ -57,4 +57,41 @@ class WebController extends Controller
         session(["cart"=>$cart]);
         return redirect()->back();
     }
+
+    public function cart(){
+        $cart = session()->has("cart") && is_array(session("cart"))?session("cart"):[];
+        $grand_total = 0;
+        $can_checkout = true;
+        foreach ($cart as $item){
+            $grand_total += $item->price * $item->buy_qty;
+            if($can_checkout && $item->qty ==0){
+                $can_checkout =  false;
+            }
+        }
+
+        return view("user.cart",compact('cart',"grand_total",'can_checkout'));
+    }
+    public function checkout(){
+        $cart = session()->has("cart") && is_array(session("cart"))?session("cart"):[];
+        if(count($cart) == 0){
+            return redirect()->to("/cart");
+        }
+        $grand_total = 0;
+        foreach ($cart as $item){
+            $grand_total += $item->price * $item->buy_qty;
+        }
+        return view("user.checkout",compact('cart',"grand_total"));
+    }
+
+    public function remove(Product $product){
+        $cart = session()->has("cart") && is_array(session("cart"))?session("cart"):[];
+        foreach ($cart as $key=>$item){
+            if($item->id == $product->id){
+                unset($cart[$key]);
+                break;
+            }
+        }
+        session(["cart"=>$cart]);
+        return redirect()->back();
+    }
 }
