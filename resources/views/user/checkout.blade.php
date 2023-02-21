@@ -8,7 +8,8 @@
     </div>
     <div class="checkout__form">
         <h4>Billing Details</h4>
-        <form action="#">
+        <form action="{{url("checkout")}}" method="post">
+            @csrf
             <div class="row">
                 <div class="col-lg-8 col-md-6">
                     <div class="row">
@@ -39,19 +40,19 @@
                     </div>
                     <div class="checkout__input">
                         <p>Postcode / ZIP<span>*</span></p>
-                        <input type="text">
+                        <input name="zip" type="text">
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="checkout__input">
                                 <p>Phone<span>*</span></p>
-                                <input type="text">
+                                <input name="phone" type="text">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="checkout__input">
                                 <p>Email<span>*</span></p>
-                                <input type="text">
+                                <input name="email" type="text">
                             </div>
                         </div>
                     </div>
