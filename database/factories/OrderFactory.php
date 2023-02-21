@@ -17,7 +17,12 @@ class OrderFactory extends Factory
             "order_date"=>now(),
             "grand_total"=>0,
             "shipping_address"=>$this->faker->address,
-            "customer_tel"=>$this->faker->phoneNumber
+            "customer_tel"=>$this->faker->phoneNumber,
+            "fullname"=>$this->faker->name,
+            "country"=>$this->faker->country,
+            "city"=>$this->faker->city,
+            "zip"=>$this->faker->postcode,
+            "email"=>$this->faker->email
         ];
     }
 }

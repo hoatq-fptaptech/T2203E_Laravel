@@ -15,32 +15,27 @@
                         <div class="col-lg-6">
                             <div class="checkout__input">
                                 <p>Fist Name<span>*</span></p>
-                                <input type="text">
+                                <input name="firstname" type="text">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="checkout__input">
                                 <p>Last Name<span>*</span></p>
-                                <input type="text">
+                                <input name="lastname" type="text">
                             </div>
                         </div>
                     </div>
                     <div class="checkout__input">
                         <p>Country<span>*</span></p>
-                        <input type="text">
+                        <input name="country" type="text">
                     </div>
                     <div class="checkout__input">
                         <p>Address<span>*</span></p>
-                        <input type="text" placeholder="Street Address" class="checkout__input__add">
-                        <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
+                        <input type="text" name="address" placeholder="Street Address" class="checkout__input__add">
                     </div>
                     <div class="checkout__input">
                         <p>Town/City<span>*</span></p>
-                        <input type="text">
-                    </div>
-                    <div class="checkout__input">
-                        <p>Country/State<span>*</span></p>
-                        <input type="text">
+                        <input name="city" type="text">
                     </div>
                     <div class="checkout__input">
                         <p>Postcode / ZIP<span>*</span></p>

@@ -78,7 +78,7 @@
                     <li>Total <span>${{$grand_total}}</span></li>
                 </ul>
                 @if($can_checkout)
-                <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                <a href="{{url("checkout")}}" class="primary-btn">PROCEED TO CHECKOUT</a>
                 @else
                     <a href="javascript:void(0);" style="background-color: gray;" class="primary-btn disabled">PROCEED TO CHECKOUT</a>
                 @endif

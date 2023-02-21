@@ -17,6 +17,11 @@ class Order extends Model
         "shipping_address",
         "customer_tel",
         "status",
+        "fullname",
+        "country",
+        "city",
+        "zip",
+        "email"
     ];
 
     public function Products(){
