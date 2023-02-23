@@ -16,6 +16,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command("mail:admin")->monthly()
+            ->appendOutputTo(public_path("logs.txt"));
+        $schedule->command("mail:admin")->hourlyAt(5)
+            ->appendOutputTo(public_path("logs.txt"));
     }
 
     /**

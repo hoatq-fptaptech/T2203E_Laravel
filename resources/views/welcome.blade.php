@@ -628,7 +628,11 @@
             if(c){
                 $.ajax({
                     url:"{{url("sendNotification")}}",
-                    method:"GET"
+                    method:"GET",
+                    data: {},
+                    success: function (rs){
+
+                    }
                 })
             }
         }
