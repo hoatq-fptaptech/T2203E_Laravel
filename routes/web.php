@@ -31,3 +31,4 @@ Route::get("/cart",[\App\Http\Controllers\WebController::class,"cart"]);
 Route::get("/checkout",[\App\Http\Controllers\WebController::class,"checkout"]);
 Route::get("/remove-cart/{product}",[\App\Http\Controllers\WebController::class,"remove"]);
 Route::post("/checkout",[\App\Http\Controllers\WebController::class,"placeOrder"]);
+Route::get("/sendNotification",[\App\Http\Controllers\WebController::class,"sendNotification"]);

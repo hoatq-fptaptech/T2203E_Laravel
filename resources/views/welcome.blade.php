@@ -2,6 +2,7 @@
 @section("content_header")
     <div class="col-sm-6">
         <h1 class="m-0 text-dark">Dashboard</h1>
+        <button type="button" onclick="lockChair()">Lock</button>
     </div><!-- /.col -->
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -610,6 +611,16 @@
         channel.bind('my-event', function(data) {
             alert(data.message+": "+data.order_id);
         });
+
+        function lockChair(){
+            var c = confirm("Lock chair?");
+            if(c){
+                $.ajax({
+                    url:"{{url("sendNotification")}}",
+                    method:"GET"
+                })
+            }
+        }
     </script>
 
 @endsection

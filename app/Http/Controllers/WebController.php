@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Pusher\Pusher;
 
 class WebController extends Controller
 {
@@ -133,5 +134,23 @@ class WebController extends Controller
         ])->createItems();
       //  $order->createItems();
         return redirect()->to("/");
+    }
+
+    public function sendNotification(){
+        // send notification
+        $options = array(
+            'cluster' => 'ap1',
+            'useTLS' => true
+        );
+        $pusher = new Pusher(
+            '778ba3922c41ec19e6df',
+            '207873fca9b89d7a4de6',
+            '1538350',
+            $options
+        );
+
+        $data['message'] = 'Có một đơn hàng mới';
+        $data["order_id"] = 55;
+        $pusher->trigger('my-channel', 'my-event', $data);
     }
 }
