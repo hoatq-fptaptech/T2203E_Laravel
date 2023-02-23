@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\NewOrder;
 use App\Mail\MailOrder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -43,27 +44,8 @@ class Order extends Model
                 "product_id"=>$item->id
             ]);
         }
-
-        // send notification
-        $options = array(
-            'cluster' => 'ap1',
-            'useTLS' => true
-        );
-        $pusher = new Pusher(
-            '778ba3922c41ec19e6df',
-            '207873fca9b89d7a4de6',
-            '1538350',
-            $options
-        );
-
-        $data['message'] = 'Có một đơn hàng mới';
-        $data["order_id"] = $this->id;
-        $pusher->trigger('my-channel', 'my-event', $data);
-
-
-
-        Mail::to($this->email)->send(new MailOrder($this));
-        session()->forget("cart");
+        // phat event
+        event(new NewOrder($this));
     }
 
 }

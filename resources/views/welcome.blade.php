@@ -612,6 +612,17 @@
             alert(data.message+": "+data.order_id);
         });
 
+        var channel1 = pusher.subscribe('order-channel');
+        channel1.bind('new-order', function(data) {
+            alert(data.message+": "+data.order_id);
+        });
+        channel1.bind('update-order', function(data) {
+            alert(data.message+": "+data.order_id);
+        });
+        channel1.bind('cancel-order', function(data) {
+            alert(data.message+": "+data.order_id);
+        });
+
         function lockChair(){
             var c = confirm("Lock chair?");
             if(c){

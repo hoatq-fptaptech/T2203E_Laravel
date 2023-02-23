@@ -43,7 +43,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{url("/admin/product")}}" class="nav-link">
+                            <a href="{{admin_url("/product")}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List products</p>
                             </a>

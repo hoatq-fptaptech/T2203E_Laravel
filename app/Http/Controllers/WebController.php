@@ -137,20 +137,8 @@ class WebController extends Controller
     }
 
     public function sendNotification(){
-        // send notification
-        $options = array(
-            'cluster' => 'ap1',
-            'useTLS' => true
-        );
-        $pusher = new Pusher(
-            '778ba3922c41ec19e6df',
-            '207873fca9b89d7a4de6',
-            '1538350',
-            $options
-        );
-
         $data['message'] = 'Có một đơn hàng mới';
         $data["order_id"] = 55;
-        $pusher->trigger('my-channel', 'my-event', $data);
+        notification("my-channel",'my-event',$data);
     }
 }
