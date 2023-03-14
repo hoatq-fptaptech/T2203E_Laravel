@@ -30,5 +30,8 @@ Route::post("/add-to-cart/{product}",[\App\Http\Controllers\WebController::class
 Route::get("/cart",[\App\Http\Controllers\WebController::class,"cart"]);
 Route::get("/checkout",[\App\Http\Controllers\WebController::class,"checkout"]);
 Route::get("/remove-cart/{product}",[\App\Http\Controllers\WebController::class,"remove"]);
-Route::post("/checkout",[\App\Http\Controllers\WebController::class,"placeOrder"]);
+Route::post("/checkout",[\App\Http\Controllers\WebController::class,"placeOrder"])->name("checkout");
 Route::get("/sendNotification",[\App\Http\Controllers\WebController::class,"sendNotification"]);
+
+Route::get("successTransaction/{order}",[\App\Http\Controllers\WebController::class,"successTransaction"])->name("successTransaction");
+Route::get("cancelTransaction/{order}",[\App\Http\Controllers\WebController::class,"cancelTransaction"])->name("cancelTransaction");

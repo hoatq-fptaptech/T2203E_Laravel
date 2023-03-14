@@ -45,7 +45,8 @@ class Order extends Model
             ]);
         }
         // phat event
-        event(new NewOrder($this));
+//        event(new NewOrder($this));
+        return $this;
     }
 
 }
